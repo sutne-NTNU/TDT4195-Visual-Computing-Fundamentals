@@ -1,0 +1,14 @@
+# Folders
+*temp/
+*/target/
+*/.vscode/
+*__pycache__/
+
+# Filetypes
+*.zip
+*.html
+
+# Specific files
+*.DS_Store
+*temp.*
+*tempCodeRunnerFile.rs
