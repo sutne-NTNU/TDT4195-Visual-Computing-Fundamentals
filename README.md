@@ -1,7 +1,5 @@
 # TDT4195 - Visual Computing Fundamentals
 
-> If you are wondering why this repository has so many commits, its because this repositroy used to contain all the subjects that are now placed in the organization **NTNU Courses**. This was obviously not a very optimal way to store the subjects, but instead of removing years of commits i just repurposed it to one of the subjects.
-
 ## Course content
 Half of the course is concerned with image syntesis (computer graphics) and half of the course is on image analysis (image processing).
 
