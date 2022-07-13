@@ -1,38 +1,18 @@
 ---
-title: Segmentation and Morphology - Report
-author: Sivert Utne
-date: \today
-lang: en-US
-papersize: a4
-geometry: margin=4cm
-toc: true
-toc-title: 'Contents'
-toc-depth: 3
-numbersections: true
-colorlinks: true
-links-as-notes: true
-figPrefix: "Figure"
-tblPrefix: "Table"
-eqnPrefix: "Equation"
-header-includes: |
-    \AtBeginDocument{\floatplacement{figure}{H}}
-    \AtBeginDocument{\floatplacement{codelisting}{H}}
-    \usepackage{fancyhdr}
-    \usepackage{lastpage}
-    \usepackage{listings}
-    \usepackage{bm}
-    \pagestyle{fancy}
-    \fancyhead[l]{Image Processing}
-    \fancyhead[c]{Assignment 3}
-    \fancyhead[r]{Sivert Utne}
-    \fancyfoot[c]{Page \thepage\ of \pageref{LastPage}}
+template: assignment.tex
+subjectcode: TDT4195
+subjectname: Visual Computing Fundamentals
+sec-num-depth: 0
+assignment: 6
+title: Segmentation and Morphology
+date: November 25, 2021
 ---
 
 
 
 \clearpage
-# Task 1 - Theory {-}
-## (a) {-}
+# Task 1 - Theory
+## (a)
 
 **Opening** is $A\circ B=(A\ominus B)\oplus B$, or in other words: Erosion followed by Dilation with the same structuring element.
 
@@ -40,20 +20,20 @@ header-includes: |
 
 If opening or closing is performed multiple times on the same image (using an identical structuring element), the output will remain the same.
 
-## (b) {-}
+## (b)
 
 The purpose of smoothing an image before performing edge-detection is to remove noise that would affect the output. This is necessary because edge-detection is usually very sensitive to noise.
 
-## (c) {-}
+## (c)
 
 *Hysteresis thresholding* works by not only using a pixels value, but also the value of pixels it is connected to determine if it should be included or not. Because of this the tresholding favors pixels connected to a big cluster of valid pixels, and disfavors pixels that are not connected to anything.
 
-## (d) {-}
+## (d)
 
 We use *Hysteresis thresholding* instead of normal thresholding when we have images that conatin a lot of noise. This will ignore minor pathes/pixels/noise that would be included in a normal treshold that is not part of a larger cluster/object but are above the threshold, and include minor pathces/pixels/noise inside larger clusters that are below the threshold.
 
 \clearpage
-## (e) {-}
+## (e)
 
 Since the structuring element $B$ is symmetrical around its reference pixel, we have that $\hat{B}=B$, and we simply try to place the structuring element (at the reference pixel) over every pixel in the original image. If there is a hit, that pixel is set to 1, otherwise it is set to 0.
 
@@ -66,8 +46,8 @@ Dilation on a $6\times6$ image where the foreground is colored white and given t
 :::
 
 \clearpage
-# Task 2 - Segmentation {-}
-## (a) {-}
+# Task 2 - Segmentation
+## (a)
 
 :::{#fig:t2a-1}
 ![Original](../src/images/input/thumbprint.png){#fig:t2a-1-orig width=45%}\  
@@ -84,7 +64,7 @@ Applying Otsu's algorithm on *polymercell.png* to find the optimal threshold gav
 :::
 
 \clearpage
-## (b) {-}
+## (b)
 
 :::{#fig:t2b}
 ![Original](../src/images/input/defective-weld.png){#fig:t2b-orig width=45%}\  
@@ -94,8 +74,8 @@ Segmentation after applying *Region Growing* using a Moore neighborhood and a th
 :::
 
 \clearpage
-# Task 3 - Morphology {-}
-## (a) {-}
+# Task 3 - Morphology
+## (a)
 
 :::{#fig:t3a}
 ![Original](../src/images/input/noisy.png){#fig:t4a1 width=45%}\  
@@ -104,7 +84,7 @@ Segmentation after applying *Region Growing* using a Moore neighborhood and a th
 Applying *binary_closing* and *binary_opening* to remove the noise from the original image using a disk shaped structuring element with radius of 8.
 :::
 
-## (b) {-}
+## (b)
 
 :::{#fig:t3b}
 ![Without Noise](../src/images/output/task3a.png){#fig:t4b1 width=45%}\  
@@ -114,7 +94,7 @@ Using chessboard-distance to create a distance transform on the image from Task 
 :::
 
 \clearpage
-## (c) {-}
+## (c)
 
 :::{#fig:t3c}
 ![Original](../src/images/input/lincoln.png){#fig:t4c1 width=45%}\  
@@ -123,7 +103,7 @@ Using chessboard-distance to create a distance transform on the image from Task 
 Before and after applying the boundary formula $A_{boundary} = A - (A \ominus B)$ with a $3\times3$ structuring element of all 1's.
 :::
 
-## (d) {-}
+## (d)
 
 :::{#fig:t3d}
 ![Original](../src/images/input/balls-with-reflections.png){#fig:t4c1 width=45%}\  

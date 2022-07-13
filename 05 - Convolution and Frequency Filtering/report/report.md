@@ -1,40 +1,21 @@
 ---
-title: Convolutional Neural Networks and Filtering in the Frequency Domain - Report
-author: Sivert Utne
-date: \today
-lang: en-US
-papersize: a4
-geometry: margin=4cm
-toc: true
-toc-title: 'Contents'
-toc-depth: 3
-numbersections: true
-colorlinks: true
-links-as-notes: true
-figPrefix: "Figure"
-tblPrefix: "Table"
-eqnPrefix: "Equation"
-header-includes: |
-    \AtBeginDocument{\floatplacement{figure}{H}}
-    \AtBeginDocument{\floatplacement{codelisting}{H}}
-    \usepackage{fancyhdr}
-    \usepackage{lastpage}
-    \usepackage{listings}
-    \usepackage{bm}
-    \pagestyle{fancy}
-    \fancyhead[l]{Image Processing}
-    \fancyhead[c]{Assignment 2}
-    \fancyhead[r]{Sivert Utne}
-    \fancyfoot[c]{Page \thepage\ of \pageref{LastPage}}
+template: assignment.tex
+subjectcode: TDT4195
+subjectname: Visual Computing Fundamentals
+sec-num-depth: 0
+assignment: 5
+title: Convolutional Neural Networks and Filtering in the Frequency Domain
+title: Image Processing and PyTorch
+date: November 12, 2021
 ---
 
 
 
 \clearpage
-# Convolutional Neural Networks {-}
-## Task 1 - Theory {-}
+# Convolutional Neural Networks
+## Task 1 - Theory
 
-### (a) {-}
+### (a)
 We have:
 $$\begin{aligned}
     \text{kernel}&=F_H\times F_W&&=5\times5\\
@@ -63,7 +44,7 @@ $$\begin{aligned}
 We see that we should use a padding of $P_H\times P_W=2\times2$.
 
 \clearpage
-### (b) {-}
+### (b)
 
 We know that:
 $$\begin{aligned}
@@ -107,7 +88,7 @@ $$\begin{aligned}
 \end{aligned}$$
 
 \clearpage
-### (c) {-}
+### (c)
 
 We have that:
 
@@ -128,7 +109,7 @@ $$\begin{aligned}
     \bm{252}&\times\bm{252}\\
 \end{aligned}$$
 
-### (d) {-}
+### (d)
 
 We have that:
 
@@ -150,12 +131,12 @@ $$\begin{aligned}
 \end{aligned}$$
 
 \clearpage
-### (e) {-}
+### (e)
 
 Assuming the image has dimensions $32\times32$ and is grayscale ($32\times32\times1$), we get the following number of parameters for each layer:
 
 | Layer |                             Weights | Biases | Parameters for layer | Total Parameters |
-| :---: | ----------------------------------: | -----: | -------------------: | ---------------: |
+|:-----:|------------------------------------:|-------:|---------------------:|-----------------:|
 |   n   | $F_H\times F_W\times C_1\times C_2$ |  $C_2$ |     Weights + Biases |           $\sum$ |
 |       |                                     |        |                      |                  |
 |   1   |        $5\times 5\times 1\times 32$ |     32 |                  832 |              832 |
@@ -178,9 +159,9 @@ We see that the total number of parameters in the network from descried in *Tabl
 
 
 \clearpage
-## Task 2 - Programming {-}
+## Task 2 - Programming
 
-### (a) {-}
+### (a)
 
 ![Training and Test Loss for the CNN described in *Table 1* in the assignment](../src/images/output/task2a.png){#fig:t2a width=70%}
 
@@ -190,22 +171,22 @@ Overfitting is when a model gets too specialized on the training data that it no
 
 From the graph we would see overfitting if the train-loss keeps decreasing while test-loss start to increase (they start to diverge).
 
-### (b) {-}
+### (b)
 
 ![Comparing "Adam" and "Stochastic Gradiant Descent" optimizers with the same model from Table 1 in the assignment](../src/images/output/task2b.png){#fig:t2b width=70%}
 
 Here we actually see more signs of overfitting as we see the test-loss for "Adam" actually starts to increase again while the train-loss remains roughly the same.
 
-### (c) {-}
+### (c)
 
 ![Visualization of filters and activations in ResNet50 on "zebra.jpg". Each column visualizes the $7 \times 7$ filter (top) of the first layer, and the corresponding grayscale activation (bottom). This is done on the following indices: [5, 8, 19, 22, 34] ](../src/images/output/task2c.png){#fig:t2c width=100%}
 
-### (d) {-}
+### (d)
 
 In [@fig:t2c] we see how the filters highlight different features in the image. Each of the filters extracts the following features:
 
 | Filter | Feature                         | Example that has this feature  |
-| -----: | :------------------------------ | :----------------------------- |
+|-------:|:--------------------------------|:-------------------------------|
 |      5 | Vertical lines                  | Stripes and edges of the Zebra |
 |      8 | Diagonal Lines (Up to the left) | Striped and edges of the Zebra |
 |     19 | Green Color                     | The Grass (yellow=green+red)   |
@@ -215,10 +196,10 @@ In [@fig:t2c] we see how the filters highlight different features in the image. 
 
 
 \clearpage
-# Filtering in the Frequency Domain {-}
-## Task 3 - Theory {-}
+# Filtering in the Frequency Domain
+## Task 3 - Theory
 
-### (a) {-}
+### (a)
 
 The dots in the images in the second row represent the frequency and rotation of the "waves" in the images in the first row.
 
@@ -237,11 +218,11 @@ $$\begin{aligned}
 1f &\rightarrow 2a\\
 \end{aligned}$$
 
-### (b) {-}
+### (b)
 
 High-Pass and Low-Pass filters are filters that only allow frequencies above or below a certain cutoff frequency to pass through. Given a certain cutoff frequency High-Pass filters will only allow frequencies higher than this cutoff, and Low-Pass filters will only allow frequencies lower than it.
 
-### (c) {-}
+### (c)
 
 Since we know that the center of image contains the lowest frequencies, and the edges contain the highest frequencies we can assume that:
 
@@ -259,9 +240,9 @@ Since we know that the center of image contains the lowest frequencies, and the 
 
 
 \clearpage
-## Task 4 - Programming {-}
+## Task 4 - Programming
 
-### (a) {-}
+### (a)
 
 [@fig:t4a-low-process] and [@fig:t4a-high-process] visualize the following in order from left to right:
 
@@ -291,7 +272,7 @@ The "ringing" artifacts we see in the filtered image is caused by us using ideal
 > *"By definition, ringing occurs when a non-oscillating input yields an oscillating output: formally, when an input signal which is monotonic on an interval has output response which is not monotonic."* ([Wikipedia](https://en.wikipedia.org/wiki/Sinc_filter))
 
 \clearpage
-### (b) {-}
+### (b)
 
 [@fig:t4b-gauss-process] and [@fig:t4b-sobel-process] visualize the following in order from left to right:
 
@@ -316,7 +297,7 @@ Image after applying the different filters/kernels.
 
 
 \clearpage
-### (c) {-}
+### (c)
 
 [@fig:t4c-process] visualizes the following in order from left to right:
 
@@ -343,17 +324,17 @@ Finally [@fig:t4c-moon] shows the high resolution result after filtering and nor
 
 
 \clearpage
-### (d) {-}
+### (d)
 For each of the pages i find the following angles of rotation:
 
-| Page  |  Angle |
-| :---: | -----: |
-|   1   | -21.81 |
-|   2   |  90.00 |
-|   4   |  26.82 |
-|   6   | -25.32 |
-|   7   | -67.44 |
-|   8   |  90.00 |
+| Page |  Angle |
+|:----:|-------:|
+|  1   | -21.81 |
+|  2   |  90.00 |
+|  4   |  26.82 |
+|  6   | -25.32 |
+|  7   | -67.44 |
+|  8   |  90.00 |
 
 [@fig:t4d] shows the binary FFT, the Hough Transform and the final rotated image.
 
